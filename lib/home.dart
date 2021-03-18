@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ui_training_4/main.dart';
 import 'package:ui_training_4/home_model.dart';
+import 'package:ui_training_4/search_results.dart';
 
 class Home extends StatelessWidget{
 
@@ -21,18 +22,19 @@ class Home extends StatelessWidget{
           ),
           boxShadow: [BoxShadow(
             blurRadius: 50,
+            color: Colors.grey
           )],
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [Colors.white, Color(0xFFDADADA)],
-            stops: [0,1],
+            stops: [0.5,1],
           ),
         ),
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: <Widget>[
-            SizedBox(height: 100),
+            SizedBox(height: 70),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -121,44 +123,127 @@ class FlightSearchConsole extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          Container(
+    return Column(
+      children: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: kColorTicketBorder),
+            color: Colors.white
+          ),
+          padding: EdgeInsets.all(20),
+          height: 100,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(Icons.place, color: Colors.grey, size: 18,),
+                  Icon(Icons.place, color: Colors.grey, size: 18,)
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Tokyo',style: TextStyle(fontSize: 15)),
+                  Container(height: 1, width: 230,color: kColorTicketBorder,),
+                  Text('NewYork',style: TextStyle(fontSize: 15))
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('HND',style: TextStyle(fontSize: 12),),
+                  Transform.rotate(
+                    angle: pi/2,
+                    child: Icon(Icons.compare_arrows, color: Colors.grey, size: 18,),
+                  ),
+                  Text('JFK',style: TextStyle(fontSize: 12))
+                ],
+              )
+            ],
+          )
+        ),
+        SizedBox(height: 15,),
+        Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              border: Border.all(color: kColorTicketBorder),
-              color: Colors.white
+                borderRadius: BorderRadius.circular(15),
+                border: Border.all(color: kColorTicketBorder),
+                color: Colors.white
             ),
-            padding: EdgeInsets.all(10),
-            child: Column(
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            height: 100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(Icons.place, color: Colors.grey,),
-                    Text('Tokyo'),
-                    Text('HND')
+                    Icon(Icons.calendar_today, color: Colors.grey, size: 18,),
+                    Icon(Icons.add, color: Colors.grey, size: 18,)
                   ],
                 ),
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(width: 20,),
-                    Container(height: 2, width: 100, color: kColorTicketBorder,),
-                    Icon(Icons.compare_arrows)
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(Icons.place ,color: Colors.grey,),
-                    Text('NewYork'),
-                    Text('JFK')
+                    Text('Monday, 18 May, 2021',style: TextStyle(fontSize: 15)),
+                    Container(height: 1,width: 272,color: kColorTicketBorder,),
+                    Text('Add return flight',style: TextStyle(fontSize: 15))
                   ],
                 ),
               ],
             )
-          )
-        ],
-      ),
+        ),
+        SizedBox(height: 15,),
+        Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                border: Border.all(color: kColorTicketBorder),
+                color: Colors.white
+            ),
+            padding: EdgeInsets.all(20),
+            height: 60,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Icon(Icons.account_circle, color: Colors.grey, size: 18,),
+                Container(
+                  width: 230,
+                  child: Text(
+                    '2 Passenger, Economy',
+                    style: TextStyle(fontSize: 15),
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+                Icon(Icons.keyboard_arrow_down, color: Colors.grey, size: 18,),
+              ],
+            )
+        ),
+        SizedBox(height: 15,),
+        GestureDetector(
+          onTap: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SearchResults()));
+          },
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                border: Border.all(color: kColorTicketBorder),
+                color: kColorPrimary
+            ),
+            padding: EdgeInsets.symmetric(vertical: 10),
+            height: 60,
+            child: Center(
+              child: Text(
+                'Search Flights',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
